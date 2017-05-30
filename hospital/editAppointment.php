@@ -32,6 +32,10 @@
       $sql  = "SELECT fname, lname FROM Doctor WHERE id = '" .  $row2['doctor_id'] . "'";
       $result = $conn->query($sql);
       $row = $result->fetch_assoc(); 
+      if ($hour >= 12) {
+        $hour++;
+        # code...
+      }
       echo "<tr><th>" . $row['fname'] . " " . $row['lname'] .  "," . $hour . ":" . $min . "</th></tr>";
       ?>
       <th>
@@ -65,6 +69,9 @@
             for ($j=0; $j < 96; $j++) { 
              $hour = sprintf("%02d", 8 + intval($j/12));
              $min = sprintf("%02d", $j%12 * 5);
+             if ($hour > 11) {
+           $hour++;
+         }
              
              echo "<option value='". $j ."'>" . $hour . ":" . $min . "</option>";
 
